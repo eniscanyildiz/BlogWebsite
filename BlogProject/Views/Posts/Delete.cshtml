@@ -1,0 +1,18 @@
+﻿@model BlogProject.Models.Post
+
+@{
+    ViewData["Title"] = "Post Sil";
+}
+
+<div class="container mt-4">
+    <h2>Post Sil</h2>
+
+    <h4>@Model.Title</h4>
+    <p>Bu postu silmek istediğinizden emin misiniz?</p>
+
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger">Sil</button>
+        <a asp-action="Index" class="btn btn-secondary ms-2">İptal</a>
+    </form>
+</div>

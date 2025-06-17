@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Giriş Yap";
+}
+
+<div class="container mt-5" style="max-width: 400px;">
+    <h2 class="mb-4">Giriş Yap</h2>
+
+    <form asp-action="Login" method="post" novalidate>
+        <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+        <div class="mb-3">
+            <label for="userName" class="form-label">Kullanıcı Adı</label>
+            <input type="text" class="form-control" id="userName" name="userName" placeholder="Kullanıcı adınızı girin" />
+        </div>
+
+        <div class="mb-3">
+            <label for="password" class="form-label">Şifre</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Şifrenizi girin" />
+        </div>
+
+        <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" id="rememberMe" name="rememberMe" />
+            <label class="form-check-label" for="rememberMe">Beni Hatırla</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Giriş Yap</button>
+    </form>
+
+    <div class="mt-3 text-center">
+        <a asp-action="Register">Hesabınız yok mu? Kayıt Ol</a>
+    </div> 
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

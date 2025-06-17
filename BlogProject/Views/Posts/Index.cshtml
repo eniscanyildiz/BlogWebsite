@@ -1,0 +1,31 @@
+﻿@model IEnumerable<BlogProject.Models.Post>
+
+@{
+    ViewData["Title"] = "Blog";
+}
+
+<div class="container mt-4">
+    <h2>Blog Posts</h2>
+    <a asp-action="Create" class="btn btn-primary mb-3">Yeni Post Ekle</a>
+
+    <div class="list-group">
+        @foreach (var post in Model)
+        {
+            <div>
+                <a asp-action="Details" asp-route-id="@post.Id" class="list-group-item list-group-item-action mb-2">
+
+                    <h5>@post.Title</h5>
+                    <small>Yazar: @post.User?.Username | Kategori: @post.Category?.Name | @post.CreatedAt.ToShortDateString()</small>
+
+                    <p>@(post.Content.Length > 150 ? post.Content.Substring(0, 150) + "..." : post.Content)</p>
+
+                    <a asp-action="Edit" asp-route-id="@post.Id" class="btn btn-sm btn-warning me-2">Düzenle</a>
+                    <a asp-action="Delete" asp-route-id="@post.Id" class="btn btn-sm btn-danger">Sil</a>
+                </a>
+            </div>
+
+
+            
+        }
+    </div>
+</div>
