@@ -6,7 +6,7 @@
 
 <div class="container mt-4">
     <h2>@Model.Title</h2>
-    <p class="text-muted">Yazar: @Model.User?.Username | Kategori: @Model.Category?.Name | @Model.CreatedAt.ToShortDateString()</p>
+    <p class="text-muted">Yazar: @Model.User?.UserName | Kategori: @Model.Category?.Name | @Model.CreatedAt.ToShortDateString()</p>
     <hr />
     <p>@Model.Content</p>
 
@@ -19,7 +19,7 @@
             @foreach (var comment in Model.Comments.OrderByDescending(c => c.CreatedAt))
             {
                 <li class="list-group-item">
-                    <strong>@comment.User?.Username</strong> <small class="text-muted">@comment.CreatedAt.ToShortDateString()</small>
+                    <strong>@comment.User?.UserName</strong> <small class="text-muted">@comment.CreatedAt.ToShortDateString()</small>
                     <p>@comment.Content</p>
                 </li>
             }

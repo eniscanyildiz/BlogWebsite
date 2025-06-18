@@ -15,8 +15,8 @@ namespace BlogProject.Models
         public string Content { get; set; } = string.Empty;
         public DateTime CreatedAt { get; set; }
 
-        public int UserId { get; set; }
-        public User User { get; set; }
+        public string UserId { get; set; }
+        public ApplicationUser User { get; set; }
 
         [Required(ErrorMessage = "İçerik zorunludur.")]
         public int? CategoryId { get; set; }

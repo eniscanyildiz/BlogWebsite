@@ -5,6 +5,7 @@ using System.Reflection.Metadata;
 using System.Threading.Tasks;
 using BlogProject.Data;
 using BlogProject.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,9 +16,12 @@ namespace BlogProject.Controllers
     public class PostsController : Controller
     {
         private readonly AppDbContext _context;
-        public PostsController(AppDbContext context)
+        private readonly UserManager<ApplicationUser> _userManager;
+
+        public PostsController(AppDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Posts (Blog ana sayfası, postları listeler)
@@ -58,13 +62,18 @@ namespace BlogProject.Controllers
                 return RedirectToAction(nameof(Details), new { id = postId });
             }
 
-            // Burada basitçe UserId = 1 olarak sabitledim, login yoksa, değiştirebilirsin.
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            //
             var comment = new Comment
             {
                 PostId = postId,
                 Content = content,
                 CreatedAt = DateTime.Now,
-                UserId = 1
+                UserId = user.Id //
             };
 
             _context.Comments.Add(comment);
@@ -92,11 +101,17 @@ namespace BlogProject.Controllers
                 return View();
             }
 
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            //
             var post = new Post
             {
                 Title = title,
                 Content = content,
-                UserId = 1,
+                UserId = user.Id, //
                 CreatedAt = DateTime.Now,
                 CategoryId = categoryId
             };
@@ -146,6 +161,14 @@ namespace BlogProject.Controllers
                 return NotFound();
             }
 
+            //giriş yapmış kullanıcı
+            var currentUser = await _userManager.GetUserAsync(User);
+
+            if (post.UserId != currentUser.Id)
+            {
+                return Forbid();
+            }
+
             // Güncellenecek alanlar
             post.Title = title;
             post.Content = content;
@@ -187,6 +210,14 @@ namespace BlogProject.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var post = await _context.Posts.FindAsync(id);
+
+            //kendi gönderisini silebilir sadece.
+            var currentUser = await _userManager.GetUserAsync(User);
+            if (post.UserId != currentUser.Id)
+            {
+                return Forbid();
+            }
+
             if (post != null)
             {
                 _context.Posts.Remove(post);
