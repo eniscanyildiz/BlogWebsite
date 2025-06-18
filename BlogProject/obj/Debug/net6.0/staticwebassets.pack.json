@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets/BlogProject.bundle.scp.css"
     },
     {
+      "Id": "/Users/a1-13/Projects/BlogProject/BlogProject/wwwroot/css/custom-theme.css",
+      "PackagePath": "staticwebassets/css/custom-theme.css"
+    },
+    {
       "Id": "/Users/a1-13/Projects/BlogProject/BlogProject/wwwroot/css/site.css",
       "PackagePath": "staticwebassets/css/site.css"
     },

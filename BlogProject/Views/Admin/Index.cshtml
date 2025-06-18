@@ -1,5 +1,40 @@
 ﻿@{
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
-<h2>Admin Paneli Dashboard</h2>
-<p>Hoş geldiniz!</p>
+
+<style>
+
+    .welcome-box {
+        background-color: #1f1f1f;
+        padding: 40px 60px;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+        text-align: center;
+        max-width: 400px;
+        width: 90%;
+        transition: transform 0.3s ease;
+        color: #eee;
+    }
+
+        .welcome-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.9);
+        }
+
+        .welcome-box h2 {
+            margin-bottom: 15px;
+            font-weight: 700;
+            font-size: 2.4rem;
+            color: #90caf9;
+        }
+
+        .welcome-box p {
+            font-size: 1.2rem;
+            color: #ccc;
+        }
+</style>
+
+    <div class="welcome-box">
+        <h2>Hoş Geldiniz!</h2>
+        <p>Admin paneline giriş yaptınız.</p>
+    </div>

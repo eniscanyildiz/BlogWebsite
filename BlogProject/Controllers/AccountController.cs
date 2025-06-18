@@ -74,7 +74,7 @@ public class AccountController : Controller
         {
             if (await _userManager.IsInRoleAsync(user, "Admin"))
             {
-                return RedirectToAction("Index", "Admin");
+                return RedirectToAction("Index", "Blog");
             }
                 
             return RedirectToAction("Index", "Posts");

@@ -4,6 +4,88 @@
     ViewData["Title"] = "Blog Yazıları";
 }
 
+<style>
+    body {
+        background-color: #f5f7fa;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #333;
+    }
+
+    h2 {
+        color: #2c3e50;
+        margin-bottom: 1.5rem;
+    }
+
+    .btn-success {
+        background-color: #4caf50;
+        border-color: #4caf50;
+        box-shadow: none;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-success:hover {
+            background-color: #45a049;
+            border-color: #45a049;
+        }
+
+    .table {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
+        border: none;
+    }
+
+        .table th {
+            background-color: #e3e6e8;
+            color: #555;
+            font-weight: 600;
+            border-bottom: 2px solid #d0d7de;
+            padding: 12px 20px;
+            text-align: left;
+        }
+
+        .table td {
+            padding: 12px 20px;
+            border-top: 1px solid #d0d7de;
+            vertical-align: middle;
+        }
+
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: #f9fbfc;
+    }
+
+    .btn-sm {
+        padding: 5px 12px;
+        font-size: 0.85rem;
+        border-radius: 4px;
+        font-weight: 600;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        box-shadow: none;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-primary:hover {
+            background-color: #0069d9;
+            border-color: #0062cc;
+        }
+
+    .btn-danger {
+        background-color: #e55353;
+        border-color: #e55353;
+        box-shadow: none;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-danger:hover {
+            background-color: #d43f3f;
+            border-color: #d23232;
+        }
+</style>
+
 <h2>Blog Yazıları</h2>
 
 <a class="btn btn-success mb-3" asp-action="Create">Yeni Yazı Ekle</a>
@@ -23,7 +105,7 @@
             <tr>
                 <td>@post.Title</td>
                 <td>@post.Category?.Name</td>
-                <td>@post.CreatedAt</td>
+                <td>@post.CreatedAt.ToString("dd.MM.yyyy")</td>
                 <td>
                     <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@post.Id">Düzenle</a>
                     <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@post.Id">Sil</a>

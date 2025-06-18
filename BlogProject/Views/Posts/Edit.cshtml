@@ -5,25 +5,99 @@
     var categories = ViewData["Categories"] as List<BlogProject.Models.Category>;
 }
 
-<div class="container mt-4">
-    <h2>Post Düzenle</h2>
+<style>
+    body {
+        background-color: #f8fafc; /* Çok açık mavi-gri ton */
+    }
 
-    <form asp-action="Edit" method="post">
+    .container {
+        max-width: 75%;
+        background: #ffffffcc; /* Transparan beyaz */
+        padding: 30px 35px;
+        border-radius: 12px;
+        box-shadow: 0 6px 15px rgba(0, 123, 255, 0.1);
+        margin-top: 10px;
+        margin-bottom: 60px;
+    }
+
+    h2 {
+        color: #007bff;
+        font-weight: 700;
+        letter-spacing: 1.2px;
+        margin-bottom: 25px;
+    }
+
+    label {
+        font-weight: 600;
+        color: #333;
+    }
+
+    .form-control, .form-select {
+        border-radius: 8px;
+        border: 1.5px solid #ced4da;
+        transition: border-color 0.25s ease;
+    }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #4a90e2;
+            box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+        }
+
+    .text-danger {
+        font-weight: 600;
+        font-size: 0.875rem;
+    }
+
+    .btn-primary {
+        background-color: #4a90e2;
+        border-color: #4a90e2;
+        padding: 8px 24px;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-primary:hover {
+            background-color: #357ABD;
+            border-color: #357ABD;
+        }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        border-color: #6c757d;
+        padding: 8px 24px;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: background-color 0.3s ease;
+        color: white;
+    }
+
+        .btn-secondary:hover {
+            background-color: #565e64;
+            border-color: #565e64;
+            color: white;
+        }
+</style>
+
+<div class="container">
+    <h2>@ViewData["Title"]</h2>
+
+    <form asp-action="Edit" method="post" novalidate>
         <input type="hidden" asp-for="Id" />
 
-        <div class="mb-3">
+        <div class="mb-4">
             <label asp-for="Title" class="form-label"></label>
             <input asp-for="Title" class="form-control" />
             <span asp-validation-for="Title" class="text-danger"></span>
         </div>
 
-        <div class="mb-3">
+        <div class="mb-4">
             <label asp-for="Content" class="form-label"></label>
-            <textarea asp-for="Content" class="form-control" rows="5"></textarea>
+            <textarea asp-for="Content" class="form-control" rows="6"></textarea>
             <span asp-validation-for="Content" class="text-danger"></span>
         </div>
 
-        <div class="mb-3">
+        <div class="mb-4">
             <label asp-for="CategoryId" class="form-label">Kategori</label>
             <select asp-for="CategoryId" class="form-select" asp-items="@(new SelectList(categories, "Id", "Name", @Model.CategoryId ))">
                 <option value="">Seçiniz</option>
@@ -31,11 +105,13 @@
             <span asp-validation-for="CategoryId" class="text-danger"></span>
         </div>
 
-        <button type="submit" class="btn btn-primary">Güncelle</button>
-        <a asp-action="Index" class="btn btn-secondary ms-2">İptal</a>
+        <div class="d-flex">
+            <button type="submit" class="btn btn-primary me-3">Güncelle</button>
+            <a asp-action="Index" class="btn btn-secondary align-self-center">İptal</a>
+        </div>
     </form>
 </div>
 
 @section Scripts {
-<partial name="_ValidationScriptsPartial" />
+    <partial name="_ValidationScriptsPartial" />
 }

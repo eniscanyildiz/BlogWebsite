@@ -4,8 +4,77 @@
     ViewData["Title"] = "Post Sil";
 }
 
-<div class="container mt-4">
-    <h2>Post Sil</h2>
+<style>
+    body {
+        background-color: #f8fafc; /* Çok açık mavi-gri ton */
+    }
+
+    .container {
+        max-width: 75%;
+        background: #ffffffcc; /* Transparan beyaz */
+        padding: 30px 35px;
+        border-radius: 12px;
+        box-shadow: 0 6px 15px rgba(0, 123, 255, 0.1);
+        margin-top: 10px;
+        margin-bottom: 60px;
+        color: #222;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        text-align: center;
+    }
+
+    h2 {
+        color: #007bff;
+        font-weight: 700;
+        letter-spacing: 1.2px;
+        margin-bottom: 20px;
+    }
+
+    h4 {
+        margin-bottom: 20px;
+        font-weight: 600;
+        color: #333;
+    }
+
+    p {
+        font-size: 1.1rem;
+        margin-bottom: 30px;
+        color: #555;
+    }
+
+    .btn-danger {
+        background-color: #ef6f6c;
+        border-color: #ef6f6c;
+        padding: 10px 30px;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-danger:hover {
+            background-color: #d35452;
+            border-color: #d35452;
+        }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        border-color: #6c757d;
+        padding: 10px 30px;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: background-color 0.3s ease;
+        color: white;
+        margin-left: 15px;
+    }
+
+        .btn-secondary:hover {
+            background-color: #565e64;
+            border-color: #565e64;
+            color: white;
+        }
+</style>
+
+<div class="container">
+    <h2>@ViewData["Title"]</h2>
 
     <h4>@Model.Title</h4>
     <p>Bu postu silmek istediğinizden emin misiniz?</p>
@@ -13,6 +82,6 @@
     <form asp-action="Delete" method="post">
         <input type="hidden" asp-for="Id" />
         <button type="submit" class="btn btn-danger">Sil</button>
-        <a asp-action="Index" class="btn btn-secondary ms-2">İptal</a>
+        <a asp-action="Index" class="btn btn-secondary">İptal</a>
     </form>
 </div>

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "cqxQlr7n9EmeByZ/5Dj9DLuapZ11RvkNsaXFwHfnCW4=",
+  "Hash": "Pha15fPdwO3QqvMH1yoVfR7ZqgdiYLOEpDQkpZuB22o=",
   "Source": "BlogProject",
   "BasePath": "_content/BlogProject",
   "Mode": "Default",
@@ -49,6 +49,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "/Users/a1-13/Projects/BlogProject/BlogProject/obj/Debug/net6.0/scopedcss/projectbundle/BlogProject.bundle.scp.css"
+    },
+    {
+      "Identity": "/Users/a1-13/Projects/BlogProject/BlogProject/wwwroot/css/custom-theme.css",
+      "SourceId": "BlogProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/a1-13/Projects/BlogProject/BlogProject/wwwroot/",
+      "BasePath": "_content/BlogProject",
+      "RelativePath": "css/custom-theme.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/css/custom-theme.css"
     },
     {
       "Identity": "/Users/a1-13/Projects/BlogProject/BlogProject/wwwroot/css/site.css",

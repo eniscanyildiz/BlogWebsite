@@ -1,0 +1,48 @@
+﻿@using System.Data
+@model BlogProject.ViewModels.SqlQueryViewModel
+@{
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+    ViewData["Title"] = "SQL Rapor Sorgusu";
+}
+
+<h2>SQL Rapor Aracı</h2>
+
+<form asp-action="Index" method="post">
+    <div class="form-group">
+        <label>SQL Sorgusu (sadece SELECT)</label>
+        <textarea asp-for="SqlQuery" class="form-control" rows="4"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Sorguyu Çalıştır</button>
+</form>
+
+@if (!string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    <div class="alert alert-danger mt-3">
+        @Model.ErrorMessage
+    </div>
+}
+else if (Model.Result != null)
+{
+    <h4 class="mt-4">Sonuçlar</h4>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                @foreach (DataColumn column in Model.Result.Columns)
+                {
+                    <th>@column.ColumnName</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (DataRow row in Model.Result.Rows)
+            {
+                <tr>
+                    @foreach (var item in row.ItemArray)
+                    {
+                        <td>@item</td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+}

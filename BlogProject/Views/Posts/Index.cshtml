@@ -6,31 +6,131 @@
     var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 }
 
-<div class="container mt-4">
-    <h2>Blog Posts</h2>
-    <a asp-action="Create" class="btn btn-primary mb-3">Yeni Post Ekle</a>
+<style>
+    body {
+        background-color: #f8fafc; /* Çok açık mavi-gri ton */
+    }
 
-    <div class="list-group">
+    .card {
+        background: #ffffffcc; /* Transparan beyaz */
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 6px 15px rgba(0, 123, 255, 0.1);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 123, 255, 0.2);
+        }
+
+    h2 {
+        color: #007bff; /* Bootstrap primary */
+        font-weight: 700;
+        letter-spacing: 1.2px;
+    }
+
+    .btn-success {
+        background-color: #6fcf97;
+        border-color: #6fcf97;
+        box-shadow: 0 4px 8px rgba(111, 207, 151, 0.3);
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-success:hover {
+            background-color: #57b36a;
+            border-color: #57b36a;
+            box-shadow: 0 6px 12px rgba(87, 179, 106, 0.5);
+        }
+
+    .btn-outline-primary {
+        color: #4a90e2;
+        border-color: #4a90e2;
+        transition: all 0.3s ease;
+    }
+
+        .btn-outline-primary:hover {
+            background-color: #4a90e2;
+            color: white;
+            border-color: #4a90e2;
+        }
+
+    .btn-primary {
+        background-color: #4a90e2;
+        border-color: #4a90e2;
+    }
+
+        .btn-primary:hover {
+            background-color: #357ABD;
+            border-color: #357ABD;
+        }
+
+    .btn-danger {
+        background-color: #ef6f6c;
+        border-color: #ef6f6c;
+        box-shadow: 0 4px 8px rgba(239, 111, 108, 0.3);
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-danger:hover {
+            background-color: #d35452;
+            border-color: #d35452;
+            box-shadow: 0 6px 12px rgba(211, 84, 82, 0.5);
+        }
+
+    .text-muted small {
+        color: #6c757d !important;
+        font-weight: 600;
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Blog Yazıları</h2>
+        <a asp-action="Create" class="btn btn-success">
+            <i class="bi bi-plus-lg"></i> Yeni Post Ekle
+        </a>
+    </div>
+
+    <div class="row">
         @foreach (var post in Model)
         {
-            <div>
-                <a asp-action="Details" asp-route-id="@post.Id" class="list-group-item list-group-item-action mb-2">
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">@post.Title</h5>
+                        <p class="text-muted mb-2">
+                            <small>
+                                <i class="bi bi-person"></i> @post.User?.UserName
+                                &nbsp; | &nbsp;
+                                <i class="bi bi-tags"></i> @post.Category?.Name
+                                &nbsp; | &nbsp;
+                                <i class="bi bi-calendar-event"></i> @post.CreatedAt.ToShortDateString()
+                            </small>
+                        </p>
 
-                    <h5>@post.Title</h5>
-                    <small>Yazar: @post.User?.UserName | Kategori: @post.Category?.Name | @post.CreatedAt.ToShortDateString()</small>
+                        <p class="card-text flex-grow-1">
+                            @(post.Content.Length > 150 ? post.Content.Substring(0, 150) + "..." : post.Content)
+                        </p>
 
-                    <p>@(post.Content.Length > 150 ? post.Content.Substring(0, 150) + "..." : post.Content)</p>
+                        <div class="mt-auto">
+                            <a asp-action="Details" asp-route-id="@post.Id" class="btn btn-outline-primary btn-sm me-2">
+                                Detaylar
+                            </a>
 
-                    @if (post.UserId == currentUserId)
-                    {
-                        <a asp-action="Edit" asp-route-id="@post.Id" class="btn btn-primary">Düzenle</a>
-                        <a asp-action="Delete" asp-route-id="@post.Id" class="btn btn-danger">Sil</a>
-                    }
-                </a>
+                            @if (post.UserId == currentUserId)
+                            {
+                                <a asp-action="Edit" asp-route-id="@post.Id" class="btn btn-primary btn-sm me-2">
+                                    Düzenle
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@post.Id" class="btn btn-danger btn-sm" onclick="return confirm('Silmek istediğinize emin misiniz?');">
+                                    Sil
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </div>
             </div>
-
-
-
         }
     </div>
 </div>
