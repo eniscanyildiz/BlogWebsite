@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Comment>
+@{
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+    ViewData["Title"] = "Yorumlar";
+}
+
+<h2>Yorumlar</h2>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Yazan</th>
+            <th>İçerik</th>
+            <th>Tarih</th>
+            <th>Blog Başlığı</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var comment in Model)
+        {
+            <tr>
+                <td>@comment.User?.UserName</td>
+                <td>@comment.Content</td>
+                <td>@comment.CreatedAt</td>
+                <td>@comment.Post?.Title</td>
+                <td>
+                    <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@comment.Id">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

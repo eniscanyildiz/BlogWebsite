@@ -10,11 +10,19 @@
     <None Remove="Data\" />
     <None Remove="Views\Posts\" />
     <None Remove="Views\Account\" />
+    <None Remove="Helper\" />
+    <None Remove="Views\Admin\" />
+    <None Remove="Views\Blog\" />
+    <None Remove="Views\Comment\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="Views\Posts\" />
     <Folder Include="Views\Account\" />
+    <Folder Include="Helper\" />
+    <Folder Include="Views\Admin\" />
+    <Folder Include="Views\Blog\" />
+    <Folder Include="Views\Comment\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.16" />

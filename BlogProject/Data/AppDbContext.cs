@@ -37,6 +37,16 @@ namespace BlogProject.Data
                 .HasForeignKey(p => p.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            /*modelBuilder.Entity<Comment>()
+                .HasOne(c => c.User)
+                .WithMany()
+                .HasForeignKey(c => c.UserId);
+
+            modelBuilder.Entity<Comment>()
+                .HasOne(c => c.Post)
+                .WithMany()
+                .HasForeignKey(c => c.PostId);*/ // burayı yaz...
+
             base.OnModelCreating(modelBuilder);
         }
 

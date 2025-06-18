@@ -39,12 +39,6 @@ public class AccountController : Controller
 
         if (result.Succeeded)
         {
-            // İlk kullanıcı ise admin rolü atanabilir (opsiyonel)
-            if (!_userManager.Users.Any())
-            {
-                await _userManager.AddToRoleAsync(user, "Admin");
-            }
-
             await _signInManager.SignInAsync(user, isPersistent: false);
             return RedirectToAction("Index", "Posts");
         }
@@ -67,18 +61,22 @@ public class AccountController : Controller
     // Login POST
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Login(string userName, string password, bool rememberMe)
+    public async Task<IActionResult> Login(string email, string password, bool rememberMe)
     {
-        if (string.IsNullOrWhiteSpace(userName) || string.IsNullOrWhiteSpace(password))
+        if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
         {
-            ModelState.AddModelError("", "Kullanıcı adı ve şifre zorunludur.");
+            ModelState.AddModelError("", "Email ve şifre zorunludur.");
             return View();
         }
-
-        var result = await _signInManager.PasswordSignInAsync(userName, password, rememberMe, false);
-
+        var user = await _userManager.FindByEmailAsync(email);
+        var result = await _signInManager.PasswordSignInAsync(user.UserName, password, rememberMe, false);
         if (result.Succeeded)
         {
+            if (await _userManager.IsInRoleAsync(user, "Admin"))
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+                
             return RedirectToAction("Index", "Posts");
         }
 
